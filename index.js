@@ -13,30 +13,27 @@ var endsWith = function(substr) {
 var _isDuplicate = function(files, file) {
   var result = false;
   for (var i = 0; i < files.length; i++) {
-    var pattern = files[i].pattern
+    var pattern = files[i].pattern;
     result = result || endsWith(path.relative(__dirname, file))(pattern);
   }
   return result;
-}
+};
 
 var framework = function(files) {
-  var isDuplicate = _isDuplicate.bind(this, files)
+  var isDuplicate = _isDuplicate.bind(this, files);
 
   /* Lolex */
-  var lolexPath = path.resolve(require.resolve('lolex'), '../../lolex.js');
+  var lolexPath = path.dirname(require.resolve('lolex/package.json')) + '/lolex.js';
 
   /* Sinon */
-  var sinonRoot = path.resolve(require.resolve('sinon'), '../../')
-  var sinonPath = path.resolve(sinonRoot, 'pkg/sinon.js');
-  var sinonTimersPath = path.resolve(sinonRoot, 'pkg/sinon-timers.js');
+  var sinonPath = path.dirname(require.resolve('sinon/package.json')) + '/pkg/sinon.js';
   if (!isDuplicate(sinonPath)) {
-    files.unshift(pattern(sinonTimersPath));
     files.unshift(pattern(lolexPath));
     files.unshift(pattern(sinonPath));
   }
 
   /* Chai */
-  var chaiPath = path.resolve(require.resolve('chai'), '../chai.js');
+  var chaiPath = path.dirname(require.resolve('chai/package.json')) + '/chai.js';
   if (!isDuplicate(chaiPath)) {
     files.unshift(pattern(chaiPath));
     files.push(pattern(path.join(__dirname, 'chai-adapter.js')));
