@@ -1,11 +1,9 @@
-var should;
-
-(function(window) {
+(function(window, karma) {
   window.should = window.chai.should();
   window.expect = window.chai.expect;
   window.assert = window.chai.assert;
 
-  var chaiConfig = window.__karma__.config.chai;
+  var chaiConfig = karma.config.chai;
   if (chaiConfig) {
     for (var key in chaiConfig) {
       if (chaiConfig.hasOwnProperty(key)) {
@@ -14,4 +12,7 @@ var should;
     }
   }
 
-})(window);
+  karma.loaded = function() {
+    karma.start();
+  };
+})(window, window.__karma__);
