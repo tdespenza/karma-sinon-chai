@@ -32,11 +32,11 @@ var framework = function(files) {
     files.unshift(pattern(sinonPath));
   }
 
-  /* Sinon-Test */
+  /*/!* Sinon-Test *!/
   var sinonTest = path.dirname(require.resolve('sinon-test/package.json')) + '/lib/index.js';
   if (!isDuplicate(sinonTest)) {
       files.unshift(pattern(sinonTest));
-  }
+  }*/
 
   /* Chai */
   var chaiPath = path.dirname(require.resolve('chai/package.json')) + '/chai.js';
