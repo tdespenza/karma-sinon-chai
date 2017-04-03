@@ -33,11 +33,10 @@ var framework = function(files) {
   }
 
   /* Sinon-Test */
-    var sinonPath = path.dirname(require.resolve('sinon-test/package.json')) + '/lib/index.js';
-    if (!isDuplicate(sinonPath)) {
-        files.unshift(pattern(lolexPath));
-        files.unshift(pattern(sinonPath));
-    }
+  var sinonTest = path.dirname(require.resolve('sinon-test/package.json')) + '/lib/index.js';
+  if (!isDuplicate(sinonTest)) {
+      files.unshift(pattern(sinonTest));
+  }
 
   /* Chai */
   var chaiPath = path.dirname(require.resolve('chai/package.json')) + '/chai.js';
